@@ -52,16 +52,15 @@
     - [x] 竖屏 9:16，`1080x1920`
     - [x] 横屏 16:9，`1920x1080`
 - [x] 支持 **批量视频生成**，可以一次生成多个视频，然后选择一个最满意的
-- [x] 支持 **视频片段时长**设置，方便调节素材切换频率
+- [x] 支持 **视频片段时长** 设置，方便调节素材切换频率
 - [x] 支持 **中文** 和 **英文** 视频文案
-- [x] 支持 **多种语音** 合成
+- [x] 支持 **多种语音** 合成，可 **实时试听** 效果
 - [x] 支持 **字幕生成**，可以调整 `字体`、`位置`、`颜色`、`大小`，同时支持`字幕描边`设置
 - [x] 支持 **背景音乐**，随机或者指定音乐文件，可设置`背景音乐音量`
-- [x] 视频素材来源 **高清**，而且 **无版权**
-- [x] 支持 **OpenAI**、**moonshot**、**Azure**、**gpt4free**、**one-api**、**通义千问**、**Google Gemini**、**Ollama** 等多种模型接入
-
-  ❓[如何使用免费的 **OpenAI GPT-3.5
-  ** 模型?](https://github.com/harry0703/MoneyPrinterTurbo?tab=readme-ov-file#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-)
+- [x] 视频素材来源 **高清**，而且 **无版权**，也可以使用自己的 **本地素材**
+- [x] 支持 **OpenAI**、**Moonshot**、**Azure**、**gpt4free**、**one-api**、**通义千问**、**Google Gemini**、**Ollama**、
+  **DeepSeek** 等多种模型接入
+    - 中国用户建议使用 **DeepSeek** 或 **Moonshot** 作为大模型提供商（国内可直接访问，不需要VPN。注册就送额度，基本够用）
 
 ### 后期计划 📅
 
@@ -70,25 +69,12 @@
 - [ ] 增加视频转场效果，使其看起来更加的流畅
 - [ ] 增加更多视频素材来源，优化视频素材和文案的匹配度
 - [ ] 增加视频长度选项：短、中、长
-- [ ] 增加免费网络代理，让访问OpenAI和素材下载不再受限
-- [ ] 可以使用自己的素材
-- [ ] 朗读声音和背景音乐，提供实时试听
 - [ ] 支持更多的语音合成服务商，比如 OpenAI TTS
 - [ ] 自动上传到YouTube平台
 
 ## 交流讨论 💬
 
-<img src="docs/wechat-04.jpg" width="150">
-
-## 更新日志
-
-### 2024-04-16 v1.1.2
-
-- 支持azure新发布的9种语音合成声音（需要配置API
-  KEY） [9个更真实的AI对话声音](https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/9-more-realistic-ai-voices-for-conversations-now-generally/ba-p/4099471)
-- 优化字幕显示
-- 修复内存泄露问题
-- 一些其他的bug修复和优化
+<img src="docs/wechat-group.jpg" width="250">
 
 ## 视频演示 📺
 
@@ -135,15 +121,18 @@
 
 ## 快速开始 🚀
 
-下载一键启动包，解压直接使用
+下载一键启动包，解压直接使用（路径不要有 **中文** 和 **空格**）
 
 ### Windows
 
-- 百度网盘: https://pan.baidu.com/s/1bpGjgQVE5sADZRn3A6F87w?pwd=xt16 提取码: xt16
-     
-下载后，建议先**双击执行** `update.bat` 更新到**最新代码**，然后双击 `start.bat` 启动Web界面
+- 百度网盘: https://pan.baidu.com/s/1MzBmcLTmVWohPEp9ohvvzA?pwd=pdcu 提取码: pdcu
+
+下载后，建议先**双击执行** `update.bat` 更新到**最新代码**，然后双击 `start.bat` 启动
+
+启动后，会自动打开浏览器（如果打开是空白，建议换成 **Chrome** 或者 **Edge** 打开）
 
 ### 其他系统
+
 还没有制作一键启动包，看下面的 **安装部署** 部分，建议使用 **docker** 部署，更加方便。
 
 ## 安装部署 📥
@@ -164,14 +153,6 @@ git clone https://github.com/harry0703/MoneyPrinterTurbo.git
 - 将 `config.example.toml` 文件复制一份，命名为 `config.toml`
 - 按照 `config.toml` 文件中的说明，配置好 `pexels_api_keys` 和 `llm_provider`，并根据 llm_provider 对应的服务商，配置相关的
   API Key
-
-#### ③ 配置大模型(LLM)
-
-- 如果要使用 `GPT-4.0` 或 `GPT-3.5`，需要有 `OpenAI` 的 `API Key`，如果没有，可以将 `llm_provider` 设置为 `g4f` (
-  一个免费使用GPT的开源库 https://github.com/xtekky/gpt4free ，但是该免费的服务，稳定性较差，有时候可以用，有时候用不了)
-- 或者可以使用到 [月之暗面](https://platform.moonshot.cn/console/api-keys) 申请。注册就送
-  15元体验金，可以对话1500次左右。然后设置 `llm_provider="moonshot"` 和 `moonshot_api_key`
-- 也可以使用 通义千问，具体请看配置文件里面的注释说明
 
 ### Docker部署 🐳
 
@@ -218,29 +199,24 @@ pip install -r requirements.txt
 
 #### ② 安装好 ImageMagick
 
-###### Windows:
+- Windows:
+    - 下载 https://imagemagick.org/script/download.php 选择Windows版本，切记一定要选择 **静态库** 版本，比如
+      ImageMagick-7.1.1-32-Q16-x64-**static**.exe
+    - 安装下载好的 ImageMagick，**注意不要修改安装路径**
+    - 修改 `配置文件 config.toml` 中的 `imagemagick_path` 为你的 **实际安装路径**
 
-- 下载 https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-30-Q16-x64-static.exe
-- 安装下载好的 ImageMagick，注意不要修改安装路径
-- 修改 `配置文件 config.toml` 中的 `imagemagick_path` 为你的实际安装路径（如果安装的时候没有修改路径，直接取消注释即可）
-
-###### MacOS:
-
-```shell
-brew install imagemagick
-````
-
-###### Ubuntu
-
-```shell
-sudo apt-get install imagemagick
-```
-
-###### CentOS
-
-```shell
-sudo yum install ImageMagick
-```
+- MacOS:
+  ```shell
+  brew install imagemagick
+  ````
+- Ubuntu
+  ```shell
+  sudo apt-get install imagemagick
+  ```
+- CentOS
+  ```shell
+  sudo yum install ImageMagick
+  ```
 
 #### ③ 启动Web界面 🌐
 
@@ -260,7 +236,7 @@ conda activate MoneyPrinterTurbo
 sh webui.sh
 ```
 
-启动后，会自动打开浏览器
+启动后，会自动打开浏览器（如果打开是空白，建议换成 **Chrome** 或者 **Edge** 打开）
 
 #### ④ 启动API服务 🚀
 
@@ -341,11 +317,15 @@ docker run -p 3040:3040 missuo/freegpt35
 - `openai_base_url` 改为 `http://localhost:3040/v1/`
 - `openai_model_name` 改为 `gpt-3.5-turbo`
 
+> 注意：该方式稳定性较差
+
 ### ❓AttributeError: 'str' object has no attribute 'choices'`
 
-这个问题是由于 OpenAI 或者其他 LLM，没有返回正确的回复导致的。
+这个问题是由于大模型没有返回正确的回复导致的。
 
 大概率是网络原因， 使用 **VPN**，或者设置 `openai_base_url` 为你的代理 ，应该就可以解决了。
+
+同时建议使用 **Moonshot** 或 **DeepSeek** 作为大模型提供商，这两个服务商在国内访问速度更快，更加稳定。
 
 ### ❓RuntimeError: No ffmpeg exe could be found
 
@@ -365,51 +345,13 @@ Install ffmpeg on your system, or set the IMAGEIO_FFMPEG_EXE environment variabl
 ffmpeg_path = "C:\\Users\\harry\\Downloads\\ffmpeg.exe"
 ```
 
-### ❓生成音频时报错或下载视频报错
-
-[issue 56](https://github.com/harry0703/MoneyPrinterTurbo/issues/56)
-
-```
-failed to generate audio, maybe the network is not available. 
-if you are in China, please use a VPN.
-```
-
-[issue 44](https://github.com/harry0703/MoneyPrinterTurbo/issues/44)
-
-```
-failed to download videos, maybe the network is not available. 
-if you are in China, please use a VPN.
-```
-
-这个大概率是网络原因，无法访问境外的服务，请使用VPN解决。
-
-### ❓ImageMagick is not installed on your computer
-
-[issue 33](https://github.com/harry0703/MoneyPrinterTurbo/issues/33)
-
-1. 按照 `示例配置` 里面提供的 `下载地址`
-   ，安装 https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-29-Q16-x64-static.exe, 用静态库
-2. 不要安装在中文路径里面，避免出现一些无法预料的问题
-
-[issue 54](https://github.com/harry0703/MoneyPrinterTurbo/issues/54#issuecomment-2017842022)
-
-如果是linux系统，可以手动安装，参考 https://cn.linux-console.net/?p=16978
-
-感谢 [@wangwenqiao666](https://github.com/wangwenqiao666)的研究探索
-
 ### ❓ImageMagick的安全策略阻止了与临时文件@/tmp/tmpur5hyyto.txt相关的操作
-
-[issue 92](https://github.com/harry0703/MoneyPrinterTurbo/issues/92)
 
 可以在ImageMagick的配置文件policy.xml中找到这些策略。
 这个文件通常位于 /etc/ImageMagick-`X`/ 或 ImageMagick 安装目录的类似位置。
 修改包含`pattern="@"`的条目，将`rights="none"`更改为`rights="read|write"`以允许对文件的读写操作。
 
-感谢 [@chenhengzh](https://github.com/chenhengzh)的研究探索
-
 ### ❓OSError: [Errno 24] Too many open files
-
-[issue 100](https://github.com/harry0703/MoneyPrinterTurbo/issues/100)
 
 这个问题是由于系统打开文件数限制导致的，可以通过修改系统的文件打开数限制来解决。
 
@@ -425,26 +367,20 @@ ulimit -n
 ulimit -n 10240
 ```
 
-### ❓AttributeError: module 'PIL.Image' has no attribute 'ANTIALIAS'
+### ❓Whisper 模型下载失败，出现如下错误
 
-[issue 101](https://github.com/harry0703/MoneyPrinterTurbo/issues/101),
-[issue 83](https://github.com/harry0703/MoneyPrinterTurbo/issues/83),
-[issue 70](https://github.com/harry0703/MoneyPrinterTurbo/issues/70)
+LocalEntryNotfoundEror: Cannot find an appropriate cached snapshotfolderfor the specified revision on the local disk and
+outgoing trafic has been disabled.
+To enablerepo look-ups and downloads online, pass 'local files only=False' as input.
 
-先看下当前的 Pillow 版本是多少
+或者
 
-```shell
-pip list |grep Pillow
-```
+An error occured while synchronizing the model Systran/faster-whisper-large-v3 from the Hugging Face Hub:
+An error happened while trying to locate the files on the Hub and we cannot find the appropriate snapshot folder for the
+specified revision on the local disk. Please check your internet connection and try again.
+Trying to load the model directly from the local cache, if it exists.
 
-如果是 10.x 的版本，可以尝试下降级看看，有用户反馈降级后正常
-
-```shell
-pip uninstall Pillow
-pip install Pillow==9.5.0
-# 或者降级到 8.4.0
-pip install Pillow==8.4.0
-```
+解决方法：[点击查看如何从网盘手动下载模型](#%E5%AD%97%E5%B9%95%E7%94%9F%E6%88%90-)
 
 ## 反馈建议 📢
 
